@@ -44,7 +44,7 @@ const exp = (
           <P>
             This repository gives a bare-bones demo of generating a basic
             website with Macromania. Nothing fancy yet. We do have lovely math
-            like <M>{`x^{1 - p}`}</M> though.
+            like <M>{`x^{1 - p}`}</M> via <M>\KaTeX</M> rendering though.
           </P>
 
           <MM>
@@ -53,7 +53,10 @@ const exp = (
 
           <P>
             {/* Calling an example macro, defined at the end of this file. */}
-            <Yell>This text is real loud.</Yell>
+            <Yell>
+              This paragraph is real loud, cause we gave it to a custom macro for
+              yelling. This system really can do anything.
+            </Yell>
           </P>
 
           {/* Creating an html tag dynamically */}
@@ -64,7 +67,7 @@ const exp = (
 
           <P>
             Here is an example of escaping HTML:{" "}
-            <EscapeHtml>{`<macromania />`}</EscapeHtml> is great!
+            <EscapeHtml>{`<em>this is not a tag</em>`}</EscapeHtml>
           </P>
         </Body>
       </Html>
