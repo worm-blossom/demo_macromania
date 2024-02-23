@@ -12,4 +12,4 @@ That is it. You can build the website with `deno task build`, you can make it bu
 
 ## Editing
 
-The entrypoint to macro expansion is `src/main.tsx`. Have fun!
+The entrypoint to macro expansion is in `src/main.tsx`. Have fun!

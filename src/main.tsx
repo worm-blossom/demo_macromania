@@ -1,4 +1,5 @@
 import {
+  A,
   Assets,
   Body,
   Context,
@@ -43,8 +44,11 @@ const exp = (
           <H1>Macromania Demo</H1>
           <P>
             This repository gives a bare-bones demo of generating a basic
-            website with Macromania. Nothing fancy yet. We do have lovely math
-            like <M>{`x^{1 - p}`}</M> via <M>\KaTeX</M> rendering though.
+            website with{" "}
+            <A href="https://github.com/worm-blossom/macromania">Macromania</A>.
+            Nothing fancy yet. We do have math like <M>{`x^{1 - p}`}</M> via
+            {" "}
+            <M>\KaTeX</M> rendering though.
           </P>
 
           <MM>
@@ -54,7 +58,7 @@ const exp = (
           <P>
             {/* Calling an example macro, defined at the end of this file. */}
             <Yell>
-              This paragraph is real loud, cause we gave it to a custom macro for
+              This paragraph is real loud, cause we used a custom macro for
               yelling. This system really can do anything.
             </Yell>
           </P>
@@ -83,6 +87,10 @@ ctx.evaluate(exp);
  * An example macro. See the
  * [Macromania tutorial](https://github.com/worm-blossom/macromania/blob/main/test/tutorial.tsx)
  * to learn what is going on here.
+ * 
+ * If you want to write more serious macros, also look into the
+ * [config framework](https://github.com/worm-blossom/macromania_config) and the
+ * [logging framework](https://github.com/worm-blossom/macromania_logger).
  */
 function Yell({ children }: { children?: Expressions }): Expression {
   return (
