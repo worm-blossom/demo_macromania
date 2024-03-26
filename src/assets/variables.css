@@ -1,0 +1,18 @@
+:root {
+    --main-bg: #ffffff;
+    --main-fg: #000000;
+}
+
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --main-bg: #151515;
+        --main-fg: #ddd;
+    }
+} */
+
+:root {
+    --font-body: "Noto Serif", serif;
+    --font-heading: "Noto Serif", serif;
+
+    --default-spacing: 0.8rem;
+}

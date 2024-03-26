@@ -1,0 +1,119 @@
+
+
+
+  
+/*
+body {
+    overflow-x: hidden;
+}
+
+body {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 3rem;
+    padding-top: 0rem;
+    max-width: 45rem;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.isPreview {
+  padding-bottom: 0rem;
+  padding-top: 0rem;
+}
+
+body > * {
+    max-width: 32rem;
+}
+
+.wide {
+    width: 100%; 
+}
+
+@media (min-width: 46rem) {
+    .wide {
+        position: relative;
+        width: 45rem;
+        max-width: calc(100vw - 0.5rem - 2 * 0.5rem);
+        clear: right;
+    }
+  
+    .wideIfPossible {
+        position: relative;
+        width: 45rem;
+        max-width: calc(100vw - 0.5rem - 2 * 0.5rem);
+        clear: right;
+    }
+}
+
+.widefixed {
+    position: relative;
+    width: 45rem;
+    clear: right;
+}
+
+.verywide {
+    position: relative;
+    min-width: calc(100vw - calc(1rem + 0.5 * calc(100vw - 45rem)));
+    max-width: calc(100vw - 0.5rem - 2 * 0.5rem);
+    clear: right;
+}
+
+.verywidefixed {
+    position: relative;
+    min-width: calc(100vw - calc(1rem + 0.5 * calc(100vw - 45rem)));
+    clear: right;
+}
+
+.onlyMargin {
+  display: none;
+}
+
+.hideIfNoMargin {
+  display: none;
+}
+
+.onlyLeft {
+  display: none;
+}
+
+.hideIfNoLeft {
+  display: none;
+}
+
+@media (max-width: 46rem) {
+  body > * {
+    margin: auto;
+  } 
+}
+
+@media (min-width: 46rem) {
+  .hideIfNoMargin {
+    display: initial;
+  }
+
+    .onlyMargin {
+        display: initial;
+        float: right;
+        clear: right;
+        position: relative;
+        width: 12rem;
+        margin-right: -13rem;
+    }
+}
+
+@media (min-width: 57rem) {
+  .onlyLeft, .hideIfNoLeft {
+    display: initial;
+    width: 10rem;
+    transform: translateX(-21rem);
+  }
+}
+
+.previewContainer {
+  max-width: 33rem;
+}
+*/
