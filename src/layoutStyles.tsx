@@ -75,13 +75,8 @@ export function LayoutStyles(
     Wrapper html structure:
 
     <body>
-        <Div id="wrapOuter">
-            <Div id="wrapToc">
-                TOC HTML
-            </Div>
-            <Div id="wrapContent">
-                Content HTML
-            </Div>
+        <Div id="wrapContent">
+            Content HTML
         </Div>
     </body>
     */
@@ -100,7 +95,7 @@ body {
     padding-right: ${paddingRight}rem;
 }
 
-#wrapToc {
+.toc {
     ${dev ? "background-color: darkseagreen !important;" : ""}
     display: none;
 }
@@ -111,13 +106,6 @@ body {
 }
 
 /* Start implementing L2 */
-
-#wrapOuter {
-    ${dev ? "background-color: aquamarine !important;" : ""}
-    position: relative;
-    margin: 0 auto;
-    display: flex;
-}
 
 @media (min-width:${htmlFontSizeInPx * (paddingLeft + paddingRight + maxMain) + SCROLLBAR}px) {
     #wrapContent {
@@ -154,19 +142,14 @@ body {
 
 /* Start implementing L4 */
 
-@media (min-width:${htmlFontSizeInPx * (paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia + paddingToc + toc) + SCROLLBAR}px) {
-    #wrapToc {
+@media (min-width:${htmlFontSizeInPx * (paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia + 2*(paddingToc + toc)) + SCROLLBAR}px) {
+    .toc {
         display: initial;
         width: ${paddingToc + toc}rem;
 
-        > * {
-            position: sticky;
-            top: 1.6rem;
-        }
-    }
-
-    #wrapOuter {
-        width: ${maxMain + paddingMarginalia + marginalia + paddingToc + toc}rem;
+        position: fixed;
+        top: 1.6rem;
+        transform: translateX(-${paddingToc + toc}rem);
     }
 }
 `;

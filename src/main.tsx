@@ -65,7 +65,7 @@ const exp = (
       <P>
         Aliquam ultrices in tellus quis imperdiet. Ut sollicitudin velit id
         auctor imperdiet. Donec vel orci tempus, commodo elit vel, dictum
-        leo.<Marginale>This is a marginale.</Marginale>
+        leo.<Marginale>This is a marginale.</Marginale>{" "}
         Aenean ligula ipsum, pharetra et felis quis, suscipit porta ligula.
         Curabitur id cursus odio, eu lacinia ante. Quisque sem massa, tristique
         sed libero id, auctor accumsan nibh. Nunc in dolor et felis{"  "}
@@ -85,7 +85,7 @@ const exp = (
             "the first of two sidenotes.",
             "The second of two sidenotes.",
           ]}
-        >
+        >{" "}
           Proin
         </Sidenotes>{" "}
         porttitor hendrerit odio a tincidunt.

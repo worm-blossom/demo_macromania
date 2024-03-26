@@ -107,7 +107,19 @@ export function ArticleTemplate(
           <Dir name="assets">
             {/* See https://github.com/worm-blossom/macromania-assets */}
             <Assets input={["src", "assets"]} assets={{}} />
-            <File name="layout.css"><LayoutStyles htmlFontSizeInPx={19.2} paddingLeft={0.8} paddingRight={0.8} maxMain={32} paddingMarginalia={1.6} marginalia={14} paddingToc={1.6}  toc={20} dev/></File>
+            <File name="layout.css">
+              <LayoutStyles
+                htmlFontSizeInPx={19.2}
+                paddingLeft={0.8}
+                paddingRight={0.8}
+                maxMain={32}
+                paddingMarginalia={1.6}
+                marginalia={14}
+                paddingToc={1.6}
+                toc={13}
+                // dev
+              />
+            </File>
           </Dir>
           <File name="index.html">
             <Html5 title="Macromania Demo">
@@ -117,17 +129,17 @@ export function ArticleTemplate(
                 scriptProps={{ type: "module" }}
               />
 
-              <Div id="wrapOuter">
-                <Div id="wrapToc">
+              <Div id="wrapContent">
+                <Hsection title={title} n={titleId}>
                   <TableOfContents stopLevel={99} />
-                </Div>
-                <Div id="wrapContent">
-                  <Hsection title={title} n={titleId}>
+                  <Div>
                     <RenderAuthors authors={authors ?? []} />
+                  </Div>
+                  <Div>
                     <RenderAbstract children={abstract} />
-                    <exps x={children} />
-                  </Hsection>
-                </Div>
+                  </Div>
+                  <exps x={children} />
+                </Hsection>
               </Div>
             </Html5>
           </File>

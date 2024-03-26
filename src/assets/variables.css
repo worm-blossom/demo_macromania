@@ -11,8 +11,11 @@
 } */
 
 :root {
-    --font-body: "Noto Serif", serif;
-    --font-heading: "Noto Serif", serif;
+    /* --font-body: "Noto Serif", serif;
+    --font-heading: "Noto Serif", serif; */
+
+    --font-body: "Open Sans", sans-serif;
+    --font-heading: var(--font-body);
 
     --default-spacing: 0.8rem;
 }

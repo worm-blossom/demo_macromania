@@ -4,14 +4,11 @@ Entrypoint for the main stylesheet.
 To tweak the appearence, change values in `variables.css`
 */
 @import "reset.css";
-@import "noto.css";
+@import "openSans.css";
 @import "layout.css";
 @import "variables.css";
 @import "authors.css";
 
-/* html {
-  font-size: 19.2px;
-} */
 
 body {
   color: var(--main-fg);
@@ -24,7 +21,7 @@ body {
   text-align: justify;
 }
 
-/* a {
+a {
   color: inherit;
   text-decoration: underline;
 }
@@ -37,7 +34,9 @@ h5,
 h6 {
   font-family: var(--font-heading);
   margin: 0;
-  margin-top: calc(2 * var(--default-spacing));
+  padding-top: calc(2.5 * var(--default-spacing));
+  padding-bottom: calc(0.5 * var(--default-spacing));
+  font-weight: bold;
 }
 
 :is(h1, h2, h3, h4, h5, h6) a {
@@ -49,15 +48,30 @@ h1 {
   text-align: center;
   font-size: 2.2em;
   padding-top: 3rem;
-  font-weight: normal;
+}
+
+h2 {
+  font-size: 1.7em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.4em;
+}
+
+h5 {
+  font-size: 1.3em;
+}
+
+h6 {
+  font-size: 1.2em;
 }
 
 p {
   padding-top: var(--default-spacing);
-}
-
-.isPreview > p:first-child {
-  padding-top: 0;
 }
 
 .abstract::before {
@@ -72,24 +86,56 @@ p {
   margin: 0 2rem;
 }
 
-.onlyMargin {
-  font-size: 0.85em;
-  line-height: 1.2;
-}
-
 a[data-preview-anchor] {
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: rgb(112, 132, 132);
 }
 
-dfn > a {
+dfn>a {
   text-decoration: none;
-} */
+}
 
+.toc {
+  font-size: 0.85rem;
+}
 
+.toc li {
+  list-style: none;
+  line-height: 1.1;
+  margin: 0.6em 0 !important;
+}
 
+.toc li.tocActive {
+  list-style-type: "☞";
+}
 
+.toc_top {
+  display: block !important;
+}
+
+nav.toc>ol {
+  padding: 0;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.marginale {
+  font-size: 0.85em;
+  line-height: 1.2;
+  margin-bottom: var(--default-spacing);
+
+  >.sidenoteCounter {
+    margin-right: 0.2rem;
+  }
+}
+
+.sidenoteCounter {
+  vertical-align: super;
+  font-size: 0.7em;
+}
 
 
 
@@ -132,32 +178,7 @@ iframe {
 
 /***********************/
 
-/* .toc {
-  font-size: 1rem;
-  width: 100%;
-  position: fixed;
-  top: 4em;
-  height: 0;
-  overflow: visible;
-}
 
-.toc li {
-  list-style: none;
-  line-height: 1;
-  margin: 0.6em 0 !important;
-}
-
-.toc li.tocActive {
-  list-style-type: "☞";
-}
-
-.toc_top {
-  display: block !important;
-}
-
-nav.toc > ol {
-  padding: 0; 
-} */
 
 /*+++++++*/
 
@@ -210,7 +231,8 @@ nav.toc > ol {
   display: none;
 }
 
-/* var(--maxWidthContent) + var(--spacingMarginalia) * 2 + var(--maxWidthMarginalia) IN PIXELS (because media queries rem do not mean what you'd think they should mean, +17px to account for a scrollbar.) *//*
+/* var(--maxWidthContent) + var(--spacingMarginalia) * 2 + var(--maxWidthMarginalia) IN PIXELS (because media queries rem do not mean what you'd think they should mean, +17px to account for a scrollbar.) */
+/*
 @media (min-width:930.917px) {
   .marginale {
     display: initial;
