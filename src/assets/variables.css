@@ -11,11 +11,13 @@
 } */
 
 :root {
-    /* --font-body: "Noto Serif", serif;
-    --font-heading: "Noto Serif", serif; */
-
-    --font-body: "Open Sans", sans-serif;
+    /* --font-body: "Open Sans", sans-serif; */
+    --font-body: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
     --font-heading: var(--font-body);
+    --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 
     --default-spacing: 0.8rem;
+
+    /* Background color for <code>. */
+    --code-bg: #eaeaea;
 }

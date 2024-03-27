@@ -178,75 +178,17 @@ iframe {
 
 /***********************/
 
-
-
-/*+++++++*/
-
-/*
-:root {
-  --maxWidthContent: 32rem;
-  --maxWidthMarginalia: 14rem;
-  --spacingMarginalia: calc(var(--default-spacing) + var(--default-spacing));
-  --spacingToc: calc(var(--default-spacing) + var(--default-spacing));
-  --maxWidthToc: 24rem;
-  --maxWidthMain: calc(var(--maxWidthContent) + var(--spacingMarginalia) + var(--maxWidthMarginalia));
+em, i {
+  font-style: italic;
 }
 
-#wrapOuter {
-  background-color: aquamarine;
-  display: flex;
-  position: relative;
-  margin: auto;
-  max-width: calc(var(--maxWidthToc) + var(--spacingToc) + var(--maxWidthMain));
+strong, b {
+  font-weight: bold;
 }
 
-#wrapContent {
-  display: inline-block;
-  background-color: bisque;
-  max-width: var(--maxWidthMain);
-
-  >* {
-    max-width: var(--maxWidthContent);
-  }
-
-  flex-grow: 1;
+code {
+  font-family: var(--font-mono);
+  background-color: var(--code-bg);
+  border-radius: 4px;
+  padding: 0.15rem;
 }
-
-#wrapToc {
-  flex-grow: 1;
-  display: none;
-  max-width: var(--maxWidthToc);
-  margin-right: var(--spacingToc);
-  background-color: darkseagreen;
-  flex-grow: 0;
-}
-
-.toc {
-  background-color: chocolate;
-  position: sticky;
-  top: 20px;
-}
-
-.marginale {
-  display: none;
-}
-
-/* var(--maxWidthContent) + var(--spacingMarginalia) * 2 + var(--maxWidthMarginalia) IN PIXELS (because media queries rem do not mean what you'd think they should mean, +17px to account for a scrollbar.) */
-/*
-@media (min-width:930.917px) {
-  .marginale {
-    display: initial;
-    float: right;
-    clear: right;
-    position: relative;
-    width: var(--maxWidthMarginalia);
-    margin-right: calc(-1 * var(--spacingMarginalia) - var(--maxWidthMarginalia));
-  }
-}
-
-@media (min-width:1147.437px) {
-  #wrapToc {
-    display: initial;
-  }
-}
-*/
