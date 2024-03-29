@@ -14,11 +14,14 @@ body {
   color: var(--main-fg);
   background-color: var(--main-bg);
 
+  text-align: justify;
+}
+
+body,
+.normalText {
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.5;
-
-  text-align: justify;
 }
 
 a {
@@ -137,6 +140,10 @@ nav.toc>ol {
   font-size: 0.7em;
 }
 
+.clearRight {
+  clear: right;
+}
+
 
 
 /**************************/
@@ -178,11 +185,13 @@ iframe {
 
 /***********************/
 
-em, i {
+em,
+i {
   font-style: italic;
 }
 
-strong, b {
+strong,
+b {
   font-weight: bold;
 }
 
@@ -191,4 +200,42 @@ code {
   background-color: var(--code-bg);
   border-radius: 4px;
   padding: 0.15rem;
+}
+
+ul,
+ol,
+img {
+  padding-top: var(--default-spacing);
+  display: block;
+}
+
+li> :is(ul, ol) {
+  padding-top: 0;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  margin-left: var(--default-spacing);
+}
+
+.katex-display {
+  margin: 0 !important;
+  padding-top: var(--default-spacing);
+}
+
+.normalText {
+  font-family: var(--font-body);
+  font-size: 1rem;
 }

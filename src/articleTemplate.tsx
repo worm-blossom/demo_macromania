@@ -22,7 +22,6 @@ import {
   File,
   Hsection,
   Html5,
-  LayoutMarginalia,
   ServerRoot,
 } from "../deps.ts";
 import { LayoutStyles } from "./layoutStyles.tsx";
@@ -84,31 +83,7 @@ export function ArticleTemplate(
       <Dir clean={false} name="src">
         <Dir clean={false} name="assets">
           <File mode="assertive" name="layout.css">
-            <LayoutMarginalia opts={{}} />
-            {
-              /* // spacing between marginalia and the main contents
-  spacingMarginalia: number;
-  // maximum width for the main contents
-  maxWidthMain: number;
-  // maximum width for the marginalia
-  maxWidthMarginalia: number;
-
-  // spacing between left and the main contents
-  spacingLeft: number;
-  // width of the left
-  left: number; */
-            }
-          </File>
-        </Dir>
-      </Dir>
-
-      <Dir name="build">
-        <ServerRoot url="">
-          <Dir name="assets">
-            {/* See https://github.com/worm-blossom/macromania-assets */}
-            <Assets input={["src", "assets"]} assets={{}} />
-            <File name="layout.css">
-              <LayoutStyles
+          <LayoutStyles
                 htmlFontSizeInPx={19.2}
                 paddingLeft={0.8}
                 paddingRight={0.8}
@@ -119,7 +94,15 @@ export function ArticleTemplate(
                 toc={13}
                 // dev
               />
-            </File>
+          </File>
+        </Dir>
+      </Dir>
+
+      <Dir name="build">
+        <ServerRoot url="">
+          <Dir name="assets">
+            {/* See https://github.com/worm-blossom/macromania-assets */}
+            <Assets input={["src", "assets"]} assets={{}} />
           </Dir>
           <File name="index.html">
             <Html5 title="Macromania Demo">

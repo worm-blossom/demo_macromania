@@ -20,8 +20,7 @@ export * from "../macromania_defref/mod.tsx";
 export * from "../macromania_hsection/mod.tsx";
 // Rendering utilities for hierarchical counters.
 export * from "../macromania_counters/mod.tsx";
-// A stylesheet (which we generate with a macro to make it configurable — cannot
-// use css variables in media queries, otherwise this would be unnecessary).
-export * from "../macromania_marginalia_layout/mod.tsx";
+// Marginalia and sidenotes.
+export * from "../macromania_marginalia/mod.tsx";
 // Previews on hover of defined concepts.
 export * from "../macromania_previews/mod.tsx";

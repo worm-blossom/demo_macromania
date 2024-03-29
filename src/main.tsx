@@ -9,9 +9,11 @@ import {
   Expressions,
   H,
   Hsection,
+  Li,
   M,
   Marginale,
   MM,
+  Ol,
   P,
   PreviewScope,
   R,
@@ -22,6 +24,9 @@ import {
   Sidenote,
   Sidenotes,
   Span,
+  Strong,
+  Ul,
+  WaitForMarginales,
 } from "../deps.ts";
 import { ArticleTemplate } from "./articleTemplate.tsx";
 
@@ -230,7 +235,7 @@ const exp = (
           This text is not the place for an introduction to TSX, you will need
           to search the web for that. A good introduction to JSX will do as
           well, as the differences only matter when defining your own macros. We
-          will assume basic familiaritx with JSX/TSX going forward.
+          will assume basic familiarity with JSX/TSX going forward.
         </P>
         <P>
           If your text editor reports type errors for the (unmodified) input
@@ -246,22 +251,87 @@ const exp = (
           Deno-specific configuration files, your best bet is installing an
           editor plugin that knows about Deno.
         </P>
-      </Hsection>
 
-      
-      
+        <P>
+          We can now delve into writing texts with Macromania. If you want to
+          learn about writing your own macros, head to the{" "}
+          <A href="https://github.com/worm-blossom/macromania/blob/main/test/tutorial.tsx">
+            tutorial
+          </A>.
+        </P>
+      </Hsection>
     </Hsection>
 
-    <Hsection n="demoSubsection" title="Hey, a Subsection">
-
-    <P>
-        This repository gives a bare-bones demo of generating a basic website
-        with{" "}
-        <A href="https://github.com/worm-blossom/macromania">
-          Macromania
-        </A>. Nothing fancy yet. We do have math like <M>{`x^{1 - p}`}</M> via
+    <Hsection n="basicTypography" title="Basic HTML and Typography">
+      <P>
+        We use HTML-like tags to mark up the input text. Wrap paragraphs in{" "}
+        <Code>P</Code> tags; you can use other tags to produce{" "}
+        <Em>emphasized</Em> or <Strong>strong</Strong> text, for example. You
         {" "}
-        <M>\KaTeX</M> rendering though.
+        <Em>must</Em>{" "}
+        capitalize these macro names. There are macros for most HTML tags, the
+        missing ones are a work-in-progress.
+      </P>
+
+      <P>
+        You can include inline <Code>code samples</Code> and{" "}
+        <A href="https://example.org/">hyperlinks</A>. As you can see with the
+        {" "}
+        <Code>A</Code> macro, HTML attributes are supported. The{" "}
+        <Code>class</Code> HTML attribute must be spelled as <Code>clazz</Code>
+        {" "}
+        though, because TypeScript reserves the name <Code>class</Code>{" "}
+        for different purposes.
+      </P>
+
+      <Ul>
+        <Li>Lists</Li>
+        <Li>are</Li>
+        <Li>nice.</Li>
+      </Ul>
+
+      <Ol>
+        <Li>Numbered</Li>
+        <Li>
+          lists<Ul>
+            <Li>Nested</Li>
+            <Li>list!</Li>
+          </Ul>
+        </Li>
+        <Li>too.</Li>
+      </Ol>
+
+      <P>
+        There is a macro for escaping HTML:{" "}
+        <EscapeHtml>{`<em>hi</em>`}</EscapeHtml>, for example, would render as
+        {" "}
+        <Em>hi</Em> if not escaped.
+      </P>
+
+      <P>
+        You can dynamically create HTML tags with a general-purpose macro; here
+        is an example of an{" "}
+        <Code>
+          <EscapeHtml>{`<img/>`}</EscapeHtml>
+        </Code>{" "}
+        tag:
+      </P>
+
+      <H
+        name="img"
+        isVoid
+        attrs={{
+          src: `/assets/macromania_deco.png`,
+          alt:
+            `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
+        }}
+      />
+
+      <P>
+        To typeset math, we use <M>{`\\href{https://katex.org/}{\\KaTeX}`}</M>
+        {" "}
+        to render LaTeX input to HTML. We support both inline math such as{" "}
+        <M>{`x^{1 - p}`}</M> and display math:
       </P>
 
       <MM>
@@ -269,23 +339,95 @@ const exp = (
       </MM>
 
       <P>
-        {/* Calling an example macro, defined at the end of this file. */}
-        <Yell>
-          This paragraph is real loud, cause we used a custom macro for yelling.
-          This system really can do anything.
-        </Yell>
+        You can find the list of KaTeX-supported math input{" "}
+        <A href="https://katex.org/docs/support_table">here</A>.
       </P>
-
-      {/* Creating an html tag dynamically */}
-      <H name="p" attrs={{ id: "specialParagraph" }}>
-        This paragraph was created with a macro that allows dynamic selection of
-        HTML element names and attributes.
-      </H>
 
       <P>
-        Here is an example of escaping HTML:{" "}
-        <EscapeHtml>{`<em>this is not a tag</em>`}</EscapeHtml>
+        Due to a long-standing{" "}
+        <A href="https://github.com/KaTeX/KaTeX/issues/1233">KaTeX issue</A>
+        {" "}
+        with line breaks directly before or after inline math, you can add
+        options to the{" "}
+        <Code>
+          <EscapeHtml>{`<M>`}</EscapeHtml>
+        </Code>{" "}
+        macro to prefix or postfix the math with regular text that cannot be
+        separated from the math via linebreaks:{" "}
+        <M pre="(" post=")">x \cdot y</M>{" "}
+        for example. The most common usecase is for punctuation after a formula,
+        like this: <M post=".">{`\\sqrt{n}`}</M>
       </P>
+
+      <P>
+        Be careful with escaping curly braces in JSX and backslashes in
+        TypeScript when writing LaTeX math.
+      </P>
+
+      <P>
+        You can place marginalia{" "}
+        <Marginale>
+          A marginale is placed in the margins without an associated counter.
+        </Marginale>{" "}
+        as well as{" "}
+        <Sidenote
+          note={
+            <>
+              A sidenote ist anchored to some body text and is visually tied to
+              the anchor through a counter.
+            </>
+          }
+        >
+          sidenotes
+        </Sidenote>. There is a separate{" "}
+        <Sidenotes
+          notes={[
+            <>
+              This may seem cumbersome, but is actually nicer for inputting
+              text.
+            </>,
+            <>
+              If there was no separate macro, Macromania might split a note that
+              you intended as a single sidenote into several sidenotes. Better
+              to be explicit in the input markup.
+            </>,
+          ]}
+        >
+          macro
+        </Sidenotes>{" "}
+        for attaching multiple sidenotes to the same anchor text.
+      </P>
+
+      <P>
+        As this paragraph demonstrates, marginales can extend well below the
+        paragraph to which they belong.
+      </P>
+
+      <WaitForMarginales />
+
+      <P>
+        You can use the{" "}
+        <Code>
+          <EscapeHtml>{`<WaitForMarginales/>`}</EscapeHtml>
+        </Code>{" "}
+        macro to delay the placement of body text until all marginales have run
+        their course.
+      </P>
+    </Hsection>
+
+    <Hsection n="sections" title="Sections">
+    </Hsection>
+
+    <Hsection n="defref" title="DefRef">
+    </Hsection>
+
+    <Hsection n="numbered" title="Numbered Elements">
+    </Hsection>
+
+    <Hsection n="cite" title="Citing">
+    </Hsection>
+
+    <Hsection n="demoSubsection" title="Hey, a Subsection">
       <P>
         We have nested sections. You can reference a section, for example{" "}
         <Rc n="demoSubsection" />.
@@ -355,24 +497,3 @@ const exp = (
 // Evaluate the expression. This has exciting side-effects,
 // like creating a directory that contains a website!
 ctx.evaluate(exp);
-
-/**
- * An example macro. See the
- * [Macromania tutorial](https://github.com/worm-blossom/macromania/blob/main/test/tutorial.tsx)
- * to learn what is going on here.
- *
- * If you want to write more serious macros, also look into the
- * [config framework](https://github.com/worm-blossom/macromania_config) and the
- * [logging framework](https://github.com/worm-blossom/macromania_logger).
- */
-function Yell({ children }: { children?: Expressions }): Expression {
-  return (
-    <map
-      fun={(evaled, _ctx) => {
-        return evaled.toUpperCase();
-      }}
-    >
-      <exps x={children} />
-    </map>
-  );
-}
