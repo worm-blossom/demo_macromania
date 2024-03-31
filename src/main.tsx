@@ -140,10 +140,10 @@ const exp = (
           <A href="https://www.typescriptlang.org/">TypeScript</A>{" "}
           code. You do not need to learn TypeScript to typeset documents with
           macromania, just like you do not need to learn macro writing to use
-          LaTeX. You <Em>do</Em>{" "}
-          need a way of executing TypeScript code. There is no dedicated program
-          that converts Macromania input into output. The input instead{" "}
-          <Em>is</Em> a (TypeScript) program that <Em>produces</Em> some output.
+          LaTeX. You <Em>do</Em> need a way of <Em>executing</Em>{" "}
+          TypeScript code. There is no dedicated program that converts
+          Macromania input into output. The input instead <Em>is</Em>{" "}
+          a (TypeScript) program that <Em>produces</Em> some output.
         </P>
 
         <P>
@@ -186,8 +186,8 @@ const exp = (
           in a{" "}
           <A href="https://en.wikipedia.org/wiki/Text_editor">text editor</A>
           <Marginale>
-            If your text error lights up with type errors, ignore them for now —
-            this is a configuration issue we treat later.
+            If your text editor lights up with type errors, ignore them for now
+            — this is a configuration issue we treat later.
           </Marginale>; this file contains the markup and text for the document.
           Scroll until you find some text, change it, save the document, rerun
           {" "}
@@ -227,8 +227,8 @@ const exp = (
           {" "}
           <A href="https://en.wikipedia.org/wiki/JSX_(JavaScript)">JSX</A>. TSX
           allows programmers to write{" "}
-          <A href="https://en.wikipedia.org/wiki/XML">XML</A>-like markup inside
-          TypeScript code. Such tags are macro invocations that instruct
+          <A href="https://en.wikipedia.org/wiki/XML">XML</A>-like markup tags
+          inside TypeScript code. Such tags are macro invocations that instruct
           Macromania to process their contents in a specific way.
         </P>
         <P>
@@ -254,7 +254,7 @@ const exp = (
 
         <P>
           We can now delve into writing texts with Macromania. If you want to
-          learn about writing your own macros, head to the{" "}
+          learn about writing your own macros, head to the dedicated{" "}
           <A href="https://github.com/worm-blossom/macromania/blob/main/test/tutorial.tsx">
             tutorial
           </A>.
@@ -410,21 +410,211 @@ const exp = (
         <Code>
           <EscapeHtml>{`<WaitForMarginales/>`}</EscapeHtml>
         </Code>{" "}
-        macro to delay the placement of body text until all marginales have run
-        their course.
+        macro to delay the placement of body text until all prior marginales
+        have run their course.
+      </P>
+
+      <P>
+        <Marginale>
+          <H
+            name="img"
+            isVoid
+            attrs={{
+              src: `/assets/wormblossom_pretty.jpg`,
+              alt:
+                `A logo for worm-blossom, the two folks behind Macromania. A circular arrangement of flower petals around a curled-up worm. It is pretty.`,
+            }}
+          />
+        </Marginale>
+        For HTML-related reasons, marginalia layout breaks when marginalia
+        contain certain HTML elements, such as <Code>div</Code> or{" "}
+        <Code>p</Code>{" "}
+        elements. To be precise, all elements inside a marginale (or sidenote)
+        must be{" "}
+        <A href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2">
+          HTML phrasing content
+        </A>{" "}
+        for things to work. You <Em>can</Em> use images.
+      </P>
+
+      <P>
+        Marginalia and sidenotes are displayed only on sufficiently wide
+        screens, so keep that in mind when deciding whether some information
+        should go into the body text or into the margins.
+      </P>
+
+      <P clazz="wide">
+        Any HTML elements with the <Code>wide</Code>{" "}
+        class extend into the margins. If the screen size is too narrow to
+        display marginalia, then those elements do not gain any extra width.
       </P>
     </Hsection>
 
-    <Hsection n="sections" title="Sections">
+    <Hsection n="defref" title="DefRef">
+      <P>
+        <A href="https://github.com/worm-blossom/macromania_defref">DefRef</A>
+        {" "}
+        is a package for defining terminology and referencing definitions such
+        that hovering over a reference displays a tooltip. Here we define{" "}
+        <Def n="forest" preview={<P>A forest is a graph without cycles.</P>} />,
+        and now we reference <R n="forest" />.
+      </P>
+
+      <P>
+        The <Code>n</Code> prop uniquely identifies the defined term, the{" "}
+        <Code>preview</Code>{" "}
+        prop defines the corresponding tooltip. You cannot define the same
+        terminology multiple times, so if you want to have the first mention of
+        a term in its tooltip look like a definition, use the <Code>fake</Code>
+        {" "}
+        prop:{" "}
+        <Def
+          n="tree"
+          preview={
+            <P>
+              A <Def n="tree" fake /> is a connected <R n="forest" />.
+            </P>
+          }
+        />.
+      </P>
+
+      <PreviewScope>
+        <P>
+          Instead of explicitly specifying the preview content, you can also
+          instruct DefRef to use the surrounding context of the{" "}
+          <Code>
+            <EscapeHtml>{`<Def/>`}</EscapeHtml>
+          </Code>{" "}
+          macro by defining a{" "}
+          <Code>
+            <EscapeHtml>{`<PreviewScope/>`}</EscapeHtml>
+          </Code>.
+        </P>
+
+        <P>
+          Multiple definitions can share the same scope: <Def n="foo" /> and
+          {" "}
+          <Def n="bar" />, for example.
+        </P>
+      </PreviewScope>
+
+      <P>
+        When referencing a concept at the beginning of a sentence, use the{" "}
+        <Code>
+          <EscapeHtml>{`<Rb/>`}</EscapeHtml>
+        </Code>{" "}
+        macro instead of the{" "}
+        <Code>
+          <EscapeHtml>{`<R/>`}</EscapeHtml>
+        </Code>.{" "}
+        <Rb n="tree" />, for example. By default, this capitalizes the term.
+      </P>
+
+      <PreviewScope>
+        <P>
+          The display text for a definition and its references defaults to its
+          {" "}
+          <Code>n</Code> prop, but you can override it with the <Code>r</Code>
+          {" "}
+          prop. You can further override the display for the
+          beginning-of-sentence version with the <Code>rb</Code>{" "}
+          prop: definition of{" "}
+          <Def n="naive-set" r="set" rb="Flub" />, and references{" "}
+          <Rb n="naive-set" /> and <R n="naive-set" />.
+        </P>
+      </PreviewScope>
+
+      <PreviewScope>
+        <P>
+          If a{" "}
+          <Code>
+            <EscapeHtml>{`<Def>`}</EscapeHtml>
+          </Code>{" "}
+          macro has children, they give the display text of the definition,
+          while references still use the <Code>n</Code> (or <Code>r</Code> or
+          {" "}
+          <Code>rb</Code>) props: definition of{" "}
+          <Def n="die">dice</Def>, references <R n="die" /> and <Rb n="die" />.
+        </P>
+      </PreviewScope>
+
+      <P>
+        Similarly, you can override how a reference renders by giving it
+        children: <R n="forest">grove</R>.
+      </P>
+
+      <PreviewScope>
+        <P>
+          Definitions can specify a plural form that can be referenced via the
+          {" "}
+          <Code>
+            <EscapeHtml>{`<Rs>`}</EscapeHtml>
+          </Code>{" "}
+          macro. For plural references at the beginning of sentences, use{" "}
+          <Code>
+            <EscapeHtml>{`<Rsb>`}</EscapeHtml>
+          </Code>. Definition of <Def n="mouse" rs="mice" />, references{" "}
+          <Rs n="mouse" /> and <Rsb n="mouse" />.
+        </P>
+      </PreviewScope>
+
+      <PreviewScope>
+        <P>
+          <Marginale>
+            This marginale is visible in the preview of <R n="wide_def" />.
+          </Marginale>
+          By default, previews are wide enough to fit the body text width, but
+          they exclude marginalia. To have previews include marginalia on
+          sufficiently wide screens, set the <Code>wide</Code>{" "}
+          flag on a definition. Definition of{" "}
+          <Def n="wide_def" wide />, references <R n="wide_def" /> and{" "}
+          <Rb n="wide_def" />.
+        </P>
+      </PreviewScope>
+
+      <PreviewScope>
+        <P>
+          You can define concepts in math mode. References outside mathmode
+          still work. Definition in math mode of{" "}
+          <M>
+            <Def n="nat" r="\natnums" />
+          </M>, reference in math mode{" "}
+          <M>
+            <R n="nat" />
+          </M>{" "}
+          and outside math mode <R n="nat" />.
+        </P>
+      </PreviewScope>
+
+      <PreviewScope>
+        <P>
+          The <Code>math</Code>{" "}
+          prop of a definition specifies an alternate expansion to be used by
+          references in math mode. Definition (outside math mode) of the <Def
+            n="integers"
+            r="set of integers"
+            math={`\\Z`}
+          />, reference in math mode{" "}
+          <M>
+            <R n="integers" />
+          </M>{" "}
+          and outside math mode <R n="integers" />.
+        </P>
+      </PreviewScope>
+
+      math and defref
     </Hsection>
 
-    <Hsection n="defref" title="DefRef">
+    <Hsection n="sections" title="Sections">
     </Hsection>
 
     <Hsection n="numbered" title="Numbered Elements">
     </Hsection>
 
     <Hsection n="cite" title="Citing">
+    </Hsection>
+
+    <Hsection n="assets" title="Assets">
     </Hsection>
 
     <Hsection n="demoSubsection" title="Hey, a Subsection">
@@ -439,7 +629,8 @@ const exp = (
           <Rc n="demoSubsubsection" /> exist.
         </P>
 
-        <PreviewScope>
+        {
+          /* <PreviewScope>
           <P>
             Time to define some concepts. Did you know that a{" "}
             <Def n="tree" rs="trees" /> is a connected, acyclic graph?{" "}
@@ -477,19 +668,9 @@ const exp = (
           />{" "}
           has something to do with trees. <Rb n="log" />{" "}
           has a more informative preview.
-        </P>
+        </P> */
+        }
       </Hsection>
-    </Hsection>
-
-    <Hsection n="typographicElements" title="Typographic Elements">
-      <P>
-        This otherwise rather unremarkable paragraph reaches an elevated degree
-        of interestingness by virtue of the text in the
-        margin<Span clazz="onlyMargin">
-          Hey, this text is in the margin. Neat!
-        </Span>{" "}
-        to its right.
-      </P>
     </Hsection>
   </ArticleTemplate>
 );

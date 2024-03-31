@@ -15,6 +15,7 @@ body {
   background-color: var(--main-bg);
 
   text-align: justify;
+  padding-bottom: var(--default-spacing);
 }
 
 body,
@@ -144,11 +145,15 @@ nav.toc>ol {
   clear: right;
 }
 
+.marginale > img {
+  padding: 0;
+}
+
 
 
 /**************************/
 
-/* @keyframes fadeIn {
+@keyframes fadeIn {
   0% {
       opacity: 0;
   }
@@ -162,7 +167,7 @@ nav.toc>ol {
   position: absolute;
   background: inherit;
   box-shadow: 5px 5px 10px 0px rgba(68, 68, 68, 0.80);
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   overflow: hidden;
   animation: fadeIn 0.4s;
   width: 100%;
@@ -179,7 +184,7 @@ iframe {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 0.2s, opacity 0.2s linear;
-} */
+}
 
 
 
@@ -230,6 +235,11 @@ li {
   margin-left: var(--default-spacing);
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 .katex-display {
   margin: 0 !important;
   padding-top: var(--default-spacing);
@@ -239,3 +249,14 @@ li {
   font-family: var(--font-body);
   font-size: 1rem;
 }
+
+.katex a {
+  text-decoration: none;
+}
+
+
+/* Hack to prevent katex blocking mouse interaction with invisible rectangles */
+/* .vlist-t.vlist-t2 > .vlist-r > .vlist:only-child {
+  pointer-events: none;
+  background: rgba(255, 0, 0, 0.5);
+} */

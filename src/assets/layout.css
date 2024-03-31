@@ -39,6 +39,11 @@ body {
         >* {
             max-width: 32rem;
         }
+
+        > .wide {
+          max-width: 47.6rem;
+          clear: right;
+        }
     }
 
     .marginale {
@@ -67,3 +72,16 @@ body {
         transform: translateX(-14.6rem);
     }
 }
+
+/* Other styling */
+
+.previewContainer {
+  max-width: min(33.6rem, 100vw);
+}
+
+@media (min-width:961.64px) {
+  .previewContainer.wide {
+    max-width: min(calc(49.2rem + 17px), 100vw);
+  }
+}
+

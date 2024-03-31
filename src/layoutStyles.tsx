@@ -22,7 +22,6 @@ import {
   File,
   Hsection,
   Html5,
-  LayoutMarginalia,
   ServerRoot,
 } from "../deps.ts";
 
@@ -69,19 +68,19 @@ export function LayoutStyles(
     dev,
   }: LayoutProps,
 ): Expression {
-    // "content" refers to main and the marginalia.
+  // "content" refers to main and the marginalia.
 
-    /*
+  /*
     Wrapper html structure:
 
     <body>
-        <Div id="wrapContent">
+        <Div class="wrapContent">
             Content HTML
         </Div>
     </body>
     */
 
-    const SCROLLBAR = 17;
+  const SCROLLBAR = 17;
 
   return `html {
     font-size: 19.2px;
@@ -107,7 +106,9 @@ body {
 
 /* Start implementing L2 */
 
-@media (min-width:${htmlFontSizeInPx * (paddingLeft + paddingRight + maxMain) + SCROLLBAR}px) {
+@media (min-width:${
+    htmlFontSizeInPx * (paddingLeft + paddingRight + maxMain) + SCROLLBAR
+  }px) {
     #wrapContent {
         ${dev ? "background-color: bisque !important;" : ""}
         width: ${maxMain}rem;
@@ -117,12 +118,21 @@ body {
 
 /* Start implementing L3 */
 
-@media (min-width:${htmlFontSizeInPx * (paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia) + SCROLLBAR}px) {
+@media (min-width:${
+    htmlFontSizeInPx *
+      (paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia) +
+    SCROLLBAR
+  }px) {
     #wrapContent {
         width: ${maxMain + paddingMarginalia + marginalia}rem;
 
         >* {
             max-width: ${maxMain}rem;
+        }
+
+        > .wide {
+          max-width: ${maxMain + paddingMarginalia + marginalia}rem;
+          clear: right;
         }
     }
 
@@ -142,7 +152,11 @@ body {
 
 /* Start implementing L4 */
 
-@media (min-width:${htmlFontSizeInPx * (paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia + 2*(paddingToc + toc)) + SCROLLBAR}px) {
+@media (min-width:${
+    htmlFontSizeInPx *
+      (paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia +
+        2 * (paddingToc + toc)) + SCROLLBAR
+  }px) {
     .toc {
         display: initial;
         width: ${paddingToc + toc}rem;
@@ -152,6 +166,22 @@ body {
         transform: translateX(-${paddingToc + toc}rem);
     }
 }
-`;
+
+/* Other styling */
+
+.previewContainer {
+  max-width: min(${paddingLeft + paddingRight + maxMain}rem, 100vw);
 }
 
+@media (min-width:${
+  htmlFontSizeInPx *
+    (paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia) +
+  SCROLLBAR
+}px) {
+  .previewContainer.wide {
+    max-width: min(calc(${paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia}rem + 17px), 100vw);
+  }
+}
+
+`;
+}
