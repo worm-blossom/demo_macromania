@@ -45,6 +45,11 @@ const prettyPreviewsInfo: ScriptDependencyInfo = {
   scriptProps: { defer: true },
 };
 
+const refHighlighting: ScriptDependencyInfo = {
+  dep: ["defs.js"],
+  scriptProps: { defer: true },
+};
+
 export function ArticleTemplate(
   { title, titleId, abstract, children, authors }: ArticleTemplateProps & {
     children?: Expressions;
@@ -71,11 +76,11 @@ export function ArticleTemplate(
         />,
         <ConfigDefref
           depsCssDef={[]}
-          depsJsDef={[prettyPreviewsInfo]}
+          depsJsDef={[prettyPreviewsInfo, refHighlighting]}
           depsCssPreview={[]}
           depsJsPreview={[]}
           depsCssRef={[]}
-          depsJsRef={[prettyPreviewsInfo]}
+          depsJsRef={[prettyPreviewsInfo, refHighlighting]}
           wrapPreviews={(_ctx, preview) => {
             return <Div id="wrapContent">{preview}</Div>
           }}
@@ -110,10 +115,6 @@ export function ArticleTemplate(
           <File name="index.html">
             <Html5 title="Macromania Demo" headContents={`<meta name="viewport" content="width=device-width, initial-scale=1">`}>
               <CssDependency dep={["index.css"]} />
-              <ScriptDependency
-                dep={["defs.js"]}
-                scriptProps={{ type: "module" }}
-              />
 
               <Div id="wrapContent">
                 <Hsection title={title} n={titleId}>

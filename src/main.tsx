@@ -601,8 +601,6 @@ const exp = (
           and outside math mode <R n="integers" />.
         </P>
       </PreviewScope>
-
-      math and defref
     </Hsection>
 
     <Hsection n="sections" title="Sections">
