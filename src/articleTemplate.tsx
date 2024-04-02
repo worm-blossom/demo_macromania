@@ -115,6 +115,7 @@ export function ArticleTemplate(
           <File name="index.html">
             <Html5 title="Macromania Demo" headContents={`<meta name="viewport" content="width=device-width, initial-scale=1">`}>
               <CssDependency dep={["index.css"]} />
+              <JsDependency dep={["toc.js"]} scriptProps={{defer: true}} />
 
               <Div id="wrapContent">
                 <Hsection title={title} n={titleId}>

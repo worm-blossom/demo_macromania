@@ -159,7 +159,7 @@ body {
   }px) {
     .toc {
         display: initial;
-        width: ${paddingToc + toc}rem;
+        width: ${toc}rem;
 
         position: fixed;
         top: 1.6rem;

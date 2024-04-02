@@ -1,5 +1,6 @@
 import {
   A,
+  B,
   Code,
   Context,
   Def,
@@ -19,6 +20,7 @@ import {
   R,
   Rb,
   Rc,
+  Rcb,
   Rs,
   Rsb,
   Sidenote,
@@ -590,7 +592,8 @@ const exp = (
         <P>
           The <Code>math</Code>{" "}
           prop of a definition specifies an alternate expansion to be used by
-          references in math mode. Definition (outside math mode) of the <Def
+          references in math mode. Definition (outside math mode) of the{" "}
+          <Def
             n="integers"
             r="set of integers"
             math={`\\Z`}
@@ -604,6 +607,82 @@ const exp = (
     </Hsection>
 
     <Hsection n="sections" title="Sections">
+      <P>
+        To define sections, subsections, and so on, use the{" "}
+        <Code>
+          <EscapeHtml>{`<Hsection>`}</EscapeHtml>
+        </Code>{"  "}
+        (<B>H</B>ierarchical{" "}
+        <B>Section</B>) macro. You can nest up to five times; nesting deeper
+        still causes an error.
+      </P>
+
+      <P>
+        The <Code>title</Code>{" "}
+        prop defines the user-visible title of the section. The <Code>n</Code>
+        {" "}
+        prop defines the HTML id and allows you to reference the section via the
+        {" "}
+        <Code>
+          <EscapeHtml>{`<Rc>`}</EscapeHtml>
+        </Code>{" "}
+        (<B>r</B>eference <B>c</B>ounted) and{" "}
+        <Code>
+          <EscapeHtml>{`<Rcb>`}</EscapeHtml>
+        </Code>{" "}
+        (<B>r</B>eference <B>c</B>ounted <B>b</B>eginning of sentence) macros:
+        {" "}
+        <Rc n="sections" /> and{" "}
+        <Rcb n="sections" />. Both render the same, but some might reconfigure
+        them to only capitalize at the beginning of sentences, for example. You
+        should always use the appropriate macro, so that the rendering can be
+        consistently changed later.
+      </P>
+
+      <P>
+        You can also use the{" "}
+        <Code>
+          <EscapeHtml>{`<R>`}</EscapeHtml>
+        </Code>{" "}
+        and{" "}
+        <Code>
+          <EscapeHtml>{`<Rb>`}</EscapeHtml>
+        </Code>{" "}
+        macros to render a reference to a section by its title or arbitrary
+        text: <R n="defref" />, <Rb n="defref" />, and{" "}
+        <R n="defref">Fblthp</R>.
+      </P>
+
+      <P>
+        We now demonstrate the various levels of nesting. You probably should
+        not use them all.
+      </P>
+
+      <Hsection n="sections2" title="Nested Section">
+        <P>
+          <Rcb n="sections2" /> and <Rc n="sections2" />. Lorem ipsum and stuff.
+        </P>
+
+        <Hsection n="sections3" title="Double-Nested Section">
+          <P>
+            <Rcb n="sections3" /> and{" "}
+            <Rc n="sections3" />. Lorem ipsum and stuff.
+          </P>
+
+          <Hsection n="sections4" title="Triple-Nested Section">
+            <P>
+              <Rcb n="sections4" /> and{" "}
+              <Rc n="sections4" />. Lorem ipsum and stuff.
+            </P>
+            <Hsection n="sections5" title="Quadruple-Nested Section">
+              <P>
+                <Rcb n="sections5" /> and{" "}
+                <Rc n="sections5" />. Lorem ipsum and stuff.
+              </P>
+            </Hsection>
+          </Hsection>
+        </Hsection>
+      </Hsection>
     </Hsection>
 
     <Hsection n="numbered" title="Numbered Elements">
@@ -613,62 +692,6 @@ const exp = (
     </Hsection>
 
     <Hsection n="assets" title="Assets">
-    </Hsection>
-
-    <Hsection n="demoSubsection" title="Hey, a Subsection">
-      <P>
-        We have nested sections. You can reference a section, for example{" "}
-        <Rc n="demoSubsection" />.
-      </P>
-
-      <Hsection n="demoSubsubsection" title="And a Subsubsection">
-        <P>
-          Here is a subsection. Yay! <Rc n="demoSubsection" /> and{" "}
-          <Rc n="demoSubsubsection" /> exist.
-        </P>
-
-        {
-          /* <PreviewScope>
-          <P>
-            Time to define some concepts. Did you know that a{" "}
-            <Def n="tree" rs="trees" /> is a connected, acyclic graph?{" "}
-            <Rb n="tree" />, yes, <R n="tree" />. <Rsb n="tree" /> and{" "}
-            <Rs n="tree" />.
-          </P>
-        </PreviewScope>
-
-        <PreviewScope>
-          <P>
-            What is a <Def n="forest" rs="forests" />{" "}
-            again? Not quite sure, but it probably involves fancy math like{" "}
-            <M post=".">{`x^{1 - p}`}</M> Notice how the preview for{" "}
-            <R n="forest" /> renders the math correctly.
-          </P>
-
-          <P>
-            Defining another concept in the same PreviewScope means that their
-            previews are shared. A <Def n="clearing" /> is a <R n="forest" />
-            {" "}
-            with a lot of space in between the <Rs n="tree" />.
-          </P>
-        </PreviewScope>
-
-        <P>
-          Instead of using PreviewScopes, you can also explicitly define a
-          preview for a term. A{" "}
-          <Def
-            n="log"
-            preview={
-              <P>
-                A <Def n="log" fake /> is the trunk of a <R n="tree" />.
-              </P>
-            }
-          />{" "}
-          has something to do with trees. <Rb n="log" />{" "}
-          has a more informative preview.
-        </P> */
-        }
-      </Hsection>
     </Hsection>
   </ArticleTemplate>
 );
