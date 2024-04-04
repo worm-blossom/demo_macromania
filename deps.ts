@@ -24,3 +24,5 @@ export * from "../macromania_counters/mod.tsx";
 export * from "../macromania_marginalia/mod.tsx";
 // Previews on hover of defined concepts.
 export * from "../macromania_previews/mod.tsx";
+// Creating numbered and referenceable figures..
+export * from "../macromania_figures/mod.tsx";

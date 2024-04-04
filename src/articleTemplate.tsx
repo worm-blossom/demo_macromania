@@ -2,7 +2,6 @@ import {
   ConfigDefref,
   ConfigHsection,
   ConfigPreviews,
-  ConfigWebserverRoot,
   Div,
   JsDependency,
   makeNumberingRenderer,
@@ -10,11 +9,14 @@ import {
   TableOfContents,
 } from "../deps.ts";
 import { ScriptDependency } from "../deps.ts";
+import { ConfigFigures } from "../deps.ts";
+import { Counter } from "../deps.ts";
 import { Section } from "../deps.ts";
 import {
   Assets,
   Config,
   ConfigKatex,
+  ConfigMarginalia,
   CssDependency,
   Dir,
   Expression,
@@ -56,6 +58,10 @@ export function ArticleTemplate(
   },
 ): Expression {
   const headingPreRenderer = makeNumberingRenderer(1);
+
+  const sidenoteCounter = new Counter("sidenote-counter", 0);
+  const figureCounter = new Counter("figure-counter", 0);
+
   return (
     <Config
       options={[
@@ -82,26 +88,28 @@ export function ArticleTemplate(
           depsCssRef={[]}
           depsJsRef={[prettyPreviewsInfo, refHighlighting]}
           wrapPreviews={(_ctx, preview) => {
-            return <Div id="wrapContent">{preview}</Div>
+            return <Div id="wrapContent">{preview}</Div>;
           }}
         />,
+        <ConfigFigures figureCounter={figureCounter} />,
+        <ConfigMarginalia sidenoteCounter={sidenoteCounter} />,
       ]}
     >
       {/* Create some assets before the "real" build step. */}
       <Dir clean={false} name="src">
         <Dir clean={false} name="assets">
           <File mode="assertive" name="layout.css">
-          <LayoutStyles
-                htmlFontSizeInPx={19.2}
-                paddingLeft={0.8}
-                paddingRight={0.8}
-                maxMain={32}
-                paddingMarginalia={1.6}
-                marginalia={14}
-                paddingToc={1.6}
-                toc={13}
-                // dev
-              />
+            <LayoutStyles
+              htmlFontSizeInPx={19.2}
+              paddingLeft={0.8}
+              paddingRight={0.8}
+              maxMain={32}
+              paddingMarginalia={1.6}
+              marginalia={14}
+              paddingToc={1.6}
+              toc={13}
+              // dev
+            />
           </File>
         </Dir>
       </Dir>
@@ -113,9 +121,12 @@ export function ArticleTemplate(
             <Assets input={["src", "assets"]} assets={{}} />
           </Dir>
           <File name="index.html">
-            <Html5 title="Macromania Demo" headContents={`<meta name="viewport" content="width=device-width, initial-scale=1">`}>
+            <Html5
+              title="Macromania Demo"
+              headContents={`<meta name="viewport" content="width=device-width, initial-scale=1">`}
+            >
               <CssDependency dep={["index.css"]} />
-              <JsDependency dep={["toc.js"]} scriptProps={{defer: true}} />
+              <JsDependency dep={["toc.js"]} scriptProps={{ defer: true }} />
 
               <Div id="wrapContent">
                 <Hsection title={title} n={titleId}>

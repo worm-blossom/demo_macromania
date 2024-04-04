@@ -8,6 +8,7 @@ import {
   EscapeHtml,
   Expression,
   Expressions,
+  Fig,
   H,
   Hsection,
   Li,
@@ -606,7 +607,7 @@ const exp = (
       </PreviewScope>
     </Hsection>
 
-    <Hsection n="sections" title="Sections">
+    <Hsection n="sections" title="Sections and Numbered Elements">
       <P>
         To define sections, subsections, and so on, use the{" "}
         <Code>
@@ -649,8 +650,7 @@ const exp = (
           <EscapeHtml>{`<Rb>`}</EscapeHtml>
         </Code>{" "}
         macros to render a reference to a section by its title or arbitrary
-        text: <R n="defref" />, <Rb n="defref" />, and{" "}
-        <R n="defref">Fblthp</R>.
+        text: <R n="defref" />, <Rb n="defref" />, and <R n="defref">Fblthp</R>.
       </P>
 
       <P>
@@ -682,6 +682,65 @@ const exp = (
             </Hsection>
           </Hsection>
         </Hsection>
+      </Hsection>
+
+      <Hsection n="figures" title="Figures">
+        <P>You can insert figures that are numbered automatically:</P>
+
+        <Fig n="firstFigure">
+          <H
+            name="img"
+            isVoid
+            attrs={{
+              src: `/assets/macromania_deco.png`,
+              alt:
+                `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
+            }}
+          />
+        </Fig>
+
+        <P>
+          Figures can have a title:
+        </P>
+
+        <Fig n="secondFigure" title="The Macromania Logotype">
+          <H
+            name="img"
+            isVoid
+            attrs={{
+              src: `/assets/macromania_deco.png`,
+              alt:
+                `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
+            }}
+          />
+        </Fig>
+
+        <P>
+          And figures can have a caption:
+        </P>
+
+        <Fig
+          n="thirdFigure"
+          title="The Macromania Logotype"
+          caption={
+            <P>The Macromania logotype exudes discipline and restraint.</P>
+          }
+        >
+          <H
+            name="img"
+            isVoid
+            attrs={{
+              src: `/assets/macromania_deco.png`,
+              alt:
+                `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
+            }}
+          />
+        </Fig>
+
+        <P>
+          You can reference figures as well: <Rc n="firstFigure" />,{" "}
+          <Rcb n="firstFigure" />.
+        </P>
       </Hsection>
     </Hsection>
 
