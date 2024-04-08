@@ -19,7 +19,7 @@ document.querySelector("body").addEventListener("mouseover", (evt) => {
 
   let refNode = evt.target;
   while (
-    !(refNode.dataset.ref && refNode.dataset.previewAnchor) &&
+    !(refNode.dataset.ref && refNode.dataset.previewAnchor && refNode.dataset.hl) &&
     refNode.parentElement
   ) {
     refNode = refNode.parentElement;
@@ -43,8 +43,8 @@ document.querySelector("body").addEventListener("mouseover", (evt) => {
 
 function applyStyles(name) {
   if (name !== null) {
-    styleSheet.insertRule(`[data-ref=${name}] ${refStyle}`);
-    styleSheet.insertRule(`#${name} > [data-ref=${name}] ${defStyle}`);
+    styleSheet.insertRule(`[data-ref=${name}][data-hl] ${refStyle}`);
+    styleSheet.insertRule(`#${name} > [data-ref=${name}][data-hl] ${defStyle}`);
   }
 }
 

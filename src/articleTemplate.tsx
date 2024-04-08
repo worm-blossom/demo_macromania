@@ -8,8 +8,6 @@ import {
   ScriptDependencyInfo,
   TableOfContents,
 } from "../deps.ts";
-import { ScriptDependency } from "../deps.ts";
-import { ConfigFigures } from "../deps.ts";
 import { Counter } from "../deps.ts";
 import { Section } from "../deps.ts";
 import {
@@ -60,7 +58,6 @@ export function ArticleTemplate(
   const headingPreRenderer = makeNumberingRenderer(1);
 
   const sidenoteCounter = new Counter("sidenote-counter", 0);
-  const figureCounter = new Counter("figure-counter", 0);
 
   return (
     <Config
@@ -91,7 +88,6 @@ export function ArticleTemplate(
             return <Div id="wrapContent">{preview}</Div>;
           }}
         />,
-        <ConfigFigures figureCounter={figureCounter} />,
         <ConfigMarginalia sidenoteCounter={sidenoteCounter} />,
       ]}
     >

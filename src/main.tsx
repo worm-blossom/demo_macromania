@@ -3,16 +3,18 @@ import {
   B,
   Code,
   Context,
+  Counter,
   Def,
   Em,
   EscapeHtml,
   Expression,
   Expressions,
-  Fig,
   H,
   Hsection,
   Li,
   M,
+  makeFigureMacro,
+  makeNumberingRenderer,
   Marginale,
   MM,
   Ol,
@@ -34,6 +36,64 @@ import {
 import { ArticleTemplate } from "./articleTemplate.tsx";
 
 const ctx = new Context();
+
+/*
+Create macros for figures (which includes theorem-like blocks).
+*/
+
+const figureCounter = new Counter("figure-counter", 0);
+const Fig = makeFigureMacro(ctx, {
+  figureCounter: figureCounter,
+  numberingInfo: {
+    r: "Figure",
+    rb: "Figure",
+    rs: "Figures",
+    rsb: "Figures",
+    render: makeNumberingRenderer(),
+  },
+});
+
+// A counter shared by several theorem-like blocks.
+const thmCounter = new Counter("thm-counter", 0);
+
+const Theorem = makeFigureMacro(ctx, {
+  figureCounter: thmCounter,
+  numberingInfo: {
+    r: "Theorem",
+    rb: "Theorem",
+    rs: "Theorems",
+    rsb: "Theorems",
+    render: makeNumberingRenderer(),
+  },
+  isTheoremLike: true,
+});
+
+const Example = makeFigureMacro(ctx, {
+  figureCounter: thmCounter, // Shares the same counter as the `Theorem` macro.
+  numberingInfo: {
+    r: "Example",
+    rb: "Example",
+    rs: "Examples",
+    rsb: "Examples",
+    render: makeNumberingRenderer(),
+  },
+  isTheoremLike: true,
+});
+
+// Exercises are rendered as theorem-like blocks, but do not share the same counter.
+const exerciseCounter = new Counter("exercise-counter", 0);
+
+const Exercise = makeFigureMacro(ctx, {
+  figureCounter: exerciseCounter, // Different counter than the `Theorem` macro.
+  numberingInfo: {
+    r: "Exercise",
+    rb: "Exercise",
+    rs: "Exercises",
+    rsb: "Exercises",
+    render: makeNumberingRenderer(),
+  },
+  isTheoremLike: true,
+});
 
 // The full input to Macromania is a single expression, which we then evaluate.
 const exp = (
@@ -684,7 +744,7 @@ const exp = (
         </Hsection>
       </Hsection>
 
-      <Hsection n="figures" title="Figures">
+      <Hsection n="figures" title="Figures and Theorems">
         <P>You can insert figures that are numbered automatically:</P>
 
         <Fig n="firstFigure">
@@ -741,10 +801,26 @@ const exp = (
           You can reference figures as well: <Rc n="firstFigure" />,{" "}
           <Rcb n="firstFigure" />.
         </P>
-      </Hsection>
-    </Hsection>
 
-    <Hsection n="numbered" title="Numbered Elements">
+          <P>We also have numbered blocks similar to the LaTeX <Code>\newtheorem</Code> construct:</P>
+
+        <Theorem n="firstTheorem">
+          <P>Trees are useful.</P>
+        </Theorem>
+
+        <Example n="firstExample">
+          <P>Trees provide oxigen, which is useful for breathing.</P>
+        </Example>
+
+        <Exercise n="firstExercise">
+          <P>List three ways in which trees are useful.</P>
+          <P>They must differ from that of <Rc n="firstExample"/>.</P>
+        </Exercise>
+
+        <P>
+          You can create your own theorem-like macros, see the creation of <Code><EscapeHtml>{`<Theorem>`}</EscapeHtml></Code>, <Code><EscapeHtml>{`<Example>`}</EscapeHtml></Code>, and <Code><EscapeHtml>{`<Exercise>`}</EscapeHtml></Code> at the beginning of this very input file. Notice how theorems and examples share a counter, but exercises use a separate counter. 
+        </P>
+      </Hsection>
     </Hsection>
 
     <Hsection n="cite" title="Citing">

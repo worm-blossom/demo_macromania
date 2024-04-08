@@ -1,6 +1,7 @@
 :root {
     --main-bg: #ffffff;
     --main-fg: #000000;
+    --main-subtle: rgb(112, 132, 132);
 }
 
 /* @media (prefers-color-scheme: dark) {
