@@ -824,11 +824,15 @@ const exp = (
     </Hsection>
 
     <Hsection n="cite" title="Citing">
+      <P>Citations and references are quite an involved topic. We do not have a good package yet, and might not get to it for a while, either. Any serious attempt should probably build on the <A href="https://citationstyles.org/">Citation Style Language</A>.</P>
     </Hsection>
 
     <Hsection n="assets" title="Assets">
+      <P>TODO document asset loading and how to get styles and js into previews.</P>
     </Hsection>
+
   </ArticleTemplate>
+  // Further TODOs: better TOC displaying of whch sections are currently on screen.
 );
 
 // Evaluate the expression. This has exciting side-effects,
