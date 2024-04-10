@@ -179,7 +179,7 @@ body {
   SCROLLBAR
 }px) {
   .previewContainer.wide {
-    max-width: min(calc(${paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia}rem + 17px), 100vw);
+    max-width: min(calc(${paddingLeft + paddingRight + maxMain + paddingMarginalia + marginalia}rem + 18px), 100vw);
   }
 }
 
