@@ -1,4 +1,4 @@
-import { Else, Gt, If, While } from "../deps.ts";
+import { Else, Gt, If, RefLoc, While } from "../deps.ts";
 import { Assign } from "../deps.ts";
 import {
   A,
@@ -964,6 +964,18 @@ const exp = (
 
       <Pseudocode n="euclid" lineNumbering>
         <FunctionItem
+          comment={
+            <>
+              Compute the{" "}
+              <A href="https://en.wikipedia.org/wiki/Greatest_common_divisor">
+                greatest common divisor
+              </A>{" "}
+              of <R n="gcd_a" /> and <R n="gcd_b" /> with the{" "}
+              <A href="https://en.wikipedia.org/wiki/Euclidean_algorithm">
+                Euclidean algorithm
+              </A>.
+            </>
+          }
           id={"gcd"}
           args={[
             ["a", "gcd_a", <M>\N</M>],
@@ -1001,10 +1013,23 @@ const exp = (
                 </>,
               ]}
             />,
-            <Return><R n="gcd_a" /></Return>,
+            <Return>
+              <R n="gcd_a" />
+            </Return>,
           ]}
         />
       </Pseudocode>
+
+      <P>
+        You can refer to pseudocode elements with DefRef; of course there are
+        preview tooltips: <R n="euclid">the Eculidean algorithm</R>, the{" "}
+        <R n="gcd" /> function, the <R n="gcd_a" /> argument;{" "}
+        <RefLoc n="euclid" lines={2}>line 2</RefLoc>,{" "}
+        <RefLoc n="euclid" lines={[3, 5]}>lines 3–5</RefLoc>, and{" "}
+        <RefLoc n="euclid" lines={{ many: [2, [4, 5], 7] }}>
+          lines 2, 4–5, and 7
+        </RefLoc>.
+      </P>
 
       <P>
         For proper documentation, see{" "}
