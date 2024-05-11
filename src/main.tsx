@@ -1,3 +1,5 @@
+import { Else, Gt, If, While } from "../deps.ts";
+import { Assign } from "../deps.ts";
 import {
   A,
   B,
@@ -10,6 +12,7 @@ import {
   EscapeHtml,
   Expression,
   Expressions,
+  FunctionItem,
   H,
   Hsection,
   JsDependency,
@@ -22,11 +25,13 @@ import {
   Ol,
   P,
   PreviewScope,
+  Pseudocode,
   R,
   Rb,
   Rc,
   Rcb,
   ResolveAsset,
+  Return,
   Rs,
   Rsb,
   Sidenote,
@@ -945,6 +950,67 @@ const exp = (
         generated preview page. Hence, a preview that contains math rendering
         will work even when displayed on a page that does not load the math
         stylesheets itself.
+      </P>
+    </Hsection>
+
+    <Hsection n="pseudocode" title="Pseudocode">
+      <P>
+        Macromania was created by computer scientiests, so naturally we created
+        packages for writing pseudocode. Below is a rendering of the{" "}
+        <A href="https://en.wikipedia.org/wiki/Euclidean_algorithm">
+          Euclidean algorithm
+        </A>.
+      </P>
+
+      <Pseudocode n="euclid" lineNumbering>
+        <FunctionItem
+          id={"gcd"}
+          args={[
+            ["a", "gcd_a", <M>\N</M>],
+            ["b", "gcd_b", <M>\N</M>],
+          ]}
+          ret={<M>\N</M>}
+          body={[
+            <While
+              cond={
+                <>
+                  <R n="gcd_a" /> != <R n="gcd_b" />
+                </>
+              }
+              body={[
+                <>
+                  <If
+                    cond={
+                      <>
+                        <R n="gcd_a" /> <Gt /> <R n="gcd_b" />
+                      </>
+                    }
+                    body={[
+                      <Assign id="gcd_a">
+                        <R n="gcd_a" /> - <R n="gcd_b" />
+                      </Assign>,
+                    ]}
+                  />{" "}
+                  <Else
+                    body={[
+                      <Assign id="gcd_b">
+                        <R n="gcd_b" /> - <R n="gcd_a" />
+                      </Assign>,
+                    ]}
+                  />
+                </>,
+              ]}
+            />,
+            <Return>a</Return>,
+          ]}
+        />
+      </Pseudocode>
+
+      <P>
+        For proper documentation, see{" "}
+        <A href="https://github.com/worm-blossom/demo_pseudocode">
+          this demo repository
+        </A>.
       </P>
     </Hsection>
   </ArticleTemplate>

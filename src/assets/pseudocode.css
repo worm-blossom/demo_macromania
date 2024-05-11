@@ -5,13 +5,13 @@ macromania_pseudocode
 :root {
     --pseudo-fg-muted: #808080;
     --pseudo-fg-slightly-muted: #454545;
-    --rb0: #0431fa;
+    --rb0: #344cb7;
     --rb1: #819331;
     --rb2: #7b3814;
-    --kw: #268bd2;
-    /* solarized-blue */
-    --kw2: #dc322f;
-    /* solarized red */
+    --kw: #4e8ab5;
+    /* based off solarized-blue, but desaturated */
+    --kw2: #c45755;
+    /* based off solarized-red, but desaturated */
 }
 
 code.pseudocode {
