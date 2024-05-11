@@ -1,4 +1,4 @@
-import { Else, Gt, If, RefLoc, While } from "../deps.ts";
+import { BibScope, Else, Gt, If, Img, RefLoc, While } from "../deps.ts";
 import { Assign } from "../deps.ts";
 import {
   A,
@@ -487,14 +487,9 @@ const exp = (
 
       <P>
         <Marginale>
-          <H
-            name="img"
-            isVoid
-            attrs={{
-              src: `/assets/wormblossom_pretty.jpg`,
-              alt:
-                `A logo for worm-blossom, the two folks behind Macromania. A circular arrangement of flower petals around a curled-up worm. It is pretty.`,
-            }}
+          <Img
+            src="/assets/wormblossom_pretty.jpg"
+            alt="A logo for worm-blossom, the two folks behind Macromania. A circular arrangement of flower petals around a curled-up worm. It is pretty."
           />
         </Marginale>
         For HTML-related reasons, marginalia layout breaks when marginalia
@@ -756,14 +751,9 @@ const exp = (
         <P>You can insert figures that are numbered automatically:</P>
 
         <Fig n="firstFigure">
-          <H
-            name="img"
-            isVoid
-            attrs={{
-              src: `/assets/macromania_deco.png`,
-              alt:
-                `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
-            }}
+          <Img
+            src="/assets/macromania_deco.png"
+            alt="A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems."
           />
         </Fig>
 
@@ -772,14 +762,9 @@ const exp = (
         </P>
 
         <Fig n="secondFigure" title="The Macromania Logotype">
-          <H
-            name="img"
-            isVoid
-            attrs={{
-              src: `/assets/macromania_deco.png`,
-              alt:
-                `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
-            }}
+          <Img
+            src="/assets/macromania_deco.png"
+            alt="A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems."
           />
         </Fig>
 
@@ -794,14 +779,9 @@ const exp = (
             <P>The Macromania logotype exudes discipline and restraint.</P>
           }
         >
-          <H
-            name="img"
-            isVoid
-            attrs={{
-              src: `/assets/macromania_deco.png`,
-              alt:
-                `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
-            }}
+          <Img
+            src="/assets/macromania_deco.png"
+            alt="A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems."
           />
         </Fig>
 
@@ -854,6 +834,21 @@ const exp = (
         serious attempt should probably build on the{" "}
         <A href="https://citationstyles.org/">Citation Style Language</A>.
       </P>
+
+      <BibScope
+        items={[{
+          item: `@inproceedings{meyer2023range,
+          title={Range-Based Set Reconciliation},
+          author={Meyer, Aljoscha},
+          booktitle={2023 42nd International Symposium on Reliable Distributed Systems (SRDS)},
+          pages={59--69},
+          year={2023},
+          organization={IEEE}
+        }
+        `,
+        }]}
+      >
+      </BibScope>
     </Hsection>
 
     <Hsection n="assets" title="Assets">
@@ -865,14 +860,9 @@ const exp = (
         that start with <Code>/assets</Code> to embed them in html:
       </P>
 
-      <H
-        name="img"
-        isVoid
-        attrs={{
-          src: `/assets/macromania_deco.png`,
-          alt:
-            `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
-        }}
+      <Img
+        src="/assets/macromania_deco.png"
+        alt="A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems."
       />
 
       <P>
@@ -885,14 +875,9 @@ const exp = (
         the path to their output location:
       </P>
 
-      <H
-        name="img"
-        isVoid
-        attrs={{
-          src: <ResolveAsset asset={["macromania_deco.png"]} />,
-          alt:
-            `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
-        }}
+      <Img
+        src={<ResolveAsset asset={["macromania_deco.png"]} />}
+        alt="A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems."
       />
 
       <P>
