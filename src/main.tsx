@@ -4,6 +4,7 @@ import {
   Code,
   Context,
   Counter,
+  CssDependency,
   Def,
   Em,
   EscapeHtml,
@@ -11,6 +12,7 @@ import {
   Expressions,
   H,
   Hsection,
+  JsDependency,
   Li,
   M,
   makeFigureMacro,
@@ -24,6 +26,7 @@ import {
   Rb,
   Rc,
   Rcb,
+  ResolveAsset,
   Rs,
   Rsb,
   Sidenote,
@@ -802,7 +805,10 @@ const exp = (
           <Rcb n="firstFigure" />.
         </P>
 
-          <P>We also have numbered blocks similar to the LaTeX <Code>\newtheorem</Code> construct:</P>
+        <P>
+          We also have numbered blocks similar to the LaTeX{" "}
+          <Code>\newtheorem</Code> construct:
+        </P>
 
         <Theorem n="firstTheorem">
           <P>Trees are useful.</P>
@@ -814,25 +820,134 @@ const exp = (
 
         <Exercise n="firstExercise">
           <P>List three ways in which trees are useful.</P>
-          <P>They must differ from that of <Rc n="firstExample"/>.</P>
+          <P>
+            They must differ from that of <Rc n="firstExample" />.
+          </P>
         </Exercise>
 
         <P>
-          You can create your own theorem-like macros, see the creation of <Code><EscapeHtml>{`<Theorem>`}</EscapeHtml></Code>, <Code><EscapeHtml>{`<Example>`}</EscapeHtml></Code>, and <Code><EscapeHtml>{`<Exercise>`}</EscapeHtml></Code> at the beginning of this very input file. Notice how theorems and examples share a counter, but exercises use a separate counter. 
+          You can create your own theorem-like macros, see the creation of{" "}
+          <Code>
+            <EscapeHtml>{`<Theorem>`}</EscapeHtml>
+          </Code>,{" "}
+          <Code>
+            <EscapeHtml>{`<Example>`}</EscapeHtml>
+          </Code>, and{" "}
+          <Code>
+            <EscapeHtml>{`<Exercise>`}</EscapeHtml>
+          </Code>{" "}
+          at the beginning of this very input file. Notice how theorems and
+          examples share a counter, but exercises use a separate counter.
         </P>
       </Hsection>
     </Hsection>
 
     <Hsection n="cite" title="Citing">
-      <P>Citations and references are quite an involved topic. We do not have a good package yet, and might not get to it for a while, either. Any serious attempt should probably build on the <A href="https://citationstyles.org/">Citation Style Language</A>.</P>
+      <P>
+        Citations and references are quite an involved topic. We do not have a
+        good package yet, and might not get to it for a while, either. Any
+        serious attempt should probably build on the{" "}
+        <A href="https://citationstyles.org/">Citation Style Language</A>.
+      </P>
     </Hsection>
 
     <Hsection n="assets" title="Assets">
-      <P>TODO document asset loading and how to get styles and js into previews.</P>
-    </Hsection>
+      <P>
+        Assets, such as stylesheets, javascript files, images, and so on, can be
+        placed in the <Code>src/assets</Code> directory; they are then copied to
+        {" "}
+        <Code>build/assets</Code>. To refer to them in html, use absolute paths
+        that start with <Code>/assets</Code> to embed them in html:
+      </P>
 
+      <H
+        name="img"
+        isVoid
+        attrs={{
+          src: `/assets/macromania_deco.png`,
+          alt:
+            `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
+        }}
+      />
+
+      <P>
+        The underlying macros that copy the assets are much more powerful in
+        principle; they can also be configured to transform the assets (say,
+        minifying or bundling some Javescript), and to rename them. This
+        template repository does neither. But when assets are indeed renamed,
+        you can refer to them by their location in the original assets directory
+        (<Code>src/assets</Code>) and let Macromania automatically substitute
+        the path to their output location:
+      </P>
+
+      <H
+        name="img"
+        isVoid
+        attrs={{
+          src: <ResolveAsset asset={["macromania_deco.png"]} />,
+          alt:
+            `A Macromania logotype, written in a rather manic, hand-lettered font, and adorned with silly little emblems.`,
+        }}
+      />
+
+      <P>
+        While you would generally place assets like images at particular points
+        of a document, css files and javascript files work differently:
+        typically, you want to place them in the{" "}
+        <Code>
+          <EscapeHtml>{`<head>`}</EscapeHtml>
+        </Code>{" "}
+        of the generated webpage. Further, you want to deduplicate them:
+        including the same image at multiple positions on the same page is fine,
+        but each stylesheet should be included only once.
+      </P>
+
+      <P>
+        For these reasons, we provide two macros for registering at any point on
+        a page that a stylesheet (respectively javascript) dependency should be
+        added to the{" "}
+        <Code>
+          <EscapeHtml>{`<head>`}</EscapeHtml>
+        </Code>{" "}
+        of that page. The following two macro calls (which produce no visible
+        output) add the main stylesheet and the javascript for animating the
+        table of contents respectively.
+      </P>
+
+      <CssDependency dep={["index.css"]} />
+      <JsDependency dep={["toc.js"]} scriptProps={{ defer: true }} />
+
+      <P>
+        You can safely delete these calls without removing those dependencies
+        from the page, because they are also registered as dependencies
+        elsewhere (in the implementation of the{" "}
+        <Code>
+          <EscapeHtml>{`<ArticleTemplate>`}</EscapeHtml>
+        </Code>{" "}
+        macro, to be precise).
+      </P>
+
+      <P>
+        The{" "}
+        <Code>
+          <EscapeHtml>{`<CssDependency/>`}</EscapeHtml>
+        </Code>{" "}
+        and{" "}
+        <Code>
+          <EscapeHtml>{`<JsDependency/>`}</EscapeHtml>
+        </Code>{" "}
+        macros play well together with{" "}
+        <R n="defref">previews</R>: registering a dependency inside a{" "}
+        <Code>
+          <EscapeHtml>{`<PreviewScope>`}</EscapeHtml>
+        </Code>{" "}
+        (or an explicitly specified preview) will add the dependency to the
+        generated preview page. Hence, a preview that contains math rendering
+        will work even when displayed on a page that does not load the math
+        stylesheets itself.
+      </P>
+    </Hsection>
   </ArticleTemplate>
-  // Further TODOs: better TOC displaying of whch sections are currently on screen.
 );
 
 // Evaluate the expression. This has exciting side-effects,
