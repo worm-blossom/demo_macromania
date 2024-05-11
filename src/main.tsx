@@ -974,7 +974,7 @@ const exp = (
             <While
               cond={
                 <>
-                  <R n="gcd_a" /> != <R n="gcd_b" />
+                  <R n="gcd_a" /> <M>\neq</M> <R n="gcd_b" />
                 </>
               }
               body={[
@@ -982,26 +982,26 @@ const exp = (
                   <If
                     cond={
                       <>
-                        <R n="gcd_a" /> <Gt /> <R n="gcd_b" />
+                        <R n="gcd_a" /> <M>\gt</M> <R n="gcd_b" />
                       </>
                     }
                     body={[
                       <Assign id="gcd_a">
-                        <R n="gcd_a" /> - <R n="gcd_b" />
+                        <R n="gcd_a" /> <M>-</M> <R n="gcd_b" />
                       </Assign>,
                     ]}
                   />{" "}
                   <Else
                     body={[
                       <Assign id="gcd_b">
-                        <R n="gcd_b" /> - <R n="gcd_a" />
+                        <R n="gcd_b" /> <M>-</M> <R n="gcd_a" />
                       </Assign>,
                     ]}
                   />
                 </>,
               ]}
             />,
-            <Return>a</Return>,
+            <Return><R n="gcd_a" /></Return>,
           ]}
         />
       </Pseudocode>
