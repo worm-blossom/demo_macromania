@@ -81,7 +81,7 @@ body {
 
 @media (min-width:961.64px) {
   .previewContainer.wide {
-    max-width: min(calc(49.2rem + 17px), 100vw);
+    max-width: min(calc(49.2rem + 18px), 100vw);
   }
 }
 

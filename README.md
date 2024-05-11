@@ -1,6 +1,6 @@
-# Demo Macromania
+# Demo Macromania Pseudocode
 
-This repository gives a demo of creating a website with macromania. While it will eventually evolve into something quite fancy, the current macros are extremely basic.
+This repository gives a demo of writing pseudocode with Macromania.
 
 ## Setup
 
