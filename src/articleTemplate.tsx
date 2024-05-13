@@ -11,6 +11,7 @@ import {
   ConfigHsection,
   ConfigPreviews,
   ConfigPseudocode,
+  ConfigWip,
   Div,
   JsDependency,
   makeNumberingRenderer,
@@ -104,6 +105,9 @@ export function ArticleTemplate(
           depsJsRef={[prettyPreviewsInfo, refHighlighting]}
         />,
         <ConfigMarginalia sidenoteCounter={sidenoteCounter} />,
+        <ConfigWip
+          // hideWIP // uncomment this line to hide all WIP annotations and silence the warning
+        />
       ]}
     >
       {/* Create some assets before the "real" build step. */}

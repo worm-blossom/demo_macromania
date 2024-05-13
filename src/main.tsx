@@ -1,3 +1,4 @@
+import { expressions } from "macromaniajsx/jsx-runtime";
 import {
   Bib,
   Bibliography,
@@ -9,6 +10,7 @@ import {
   Img,
   RefLoc,
   While,
+  Wip,
 } from "../deps.ts";
 import { Assign } from "../deps.ts";
 import {
@@ -55,6 +57,13 @@ import {
 import { ArticleTemplate } from "./articleTemplate.tsx";
 
 const ctx = new Context();
+
+/*
+Create a custom annotation macro.
+*/
+function Alj({children, inline}: {children?: Expressions, inline?: boolean}): Expression {
+  return <Wip fg="#6804cc" bg="#ecdbfc" wrap={(_ctx, inner) => <>alj: {inner}</>} children={children} inline={inline}/>;
+}
 
 /*
 Create macros for figures (which includes theorem-like blocks).
@@ -1054,6 +1063,20 @@ const exp = (
         <A href="https://github.com/worm-blossom/demo_pseudocode">
           this demo repository
         </A>.
+      </P>
+    </Hsection>
+
+    <Hsection title="Annotations" n="wipAnnotations">
+      <P>
+        Sometimes, particularly when collaborating with other authors, you might want to add annotations<Wip>This is an annotation in the margin.</Wip> to a work-in-progress document. The <Code>Wip</Code> macro lets you do just that<Wip inline>This is an inline annotation</Wip>, either in the margin or inline. As long as there are any annotations left, rendering the document logs a warning.
+      </P>
+
+      <P>
+        You can hide all annotations and silence the rendering warning with a config option, see the <Code>./articleTemple</Code> file for a (commented) example.
+      </P>
+
+      <P>
+        The <Code>Wip</Code> takes some options for customising its styling <Wip inline fg="#a58a00" bg="#f9ea9f" wrap={(_ctx, content) => <>{"[SomeTag] "}{content}</>}>A modified and styled inline annotation</Wip>. These options are less intended for one-off styling and more for creating distingt annocation macros for distinct purposes. Toward the top of this file, I defined a comment macro that marks comments as being written my me <Alj inline>Like this one!</Alj>. Collaborators<Alj>And here is a comment in the margin, again clearly written by Aljoscha.</Alj> could do the same, so that everyone can tell at a glance who wrote which annotation.
       </P>
     </Hsection>
   </ArticleTemplate>
