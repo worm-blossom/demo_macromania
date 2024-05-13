@@ -16,6 +16,7 @@ body {
 
   text-align: justify;
   padding-bottom: var(--default-spacing);
+  margin-top: var(--default-spacing);
 }
 
 body,
@@ -244,7 +245,7 @@ figure {
   }
 }
 
-figure:not(.theoremlike) > figcaption >*:not(*:first-child) {
+figure:not(.theoremlike)>figcaption>*:not(*:first-child) {
   margin-top: calc(0.25 * var(--default-spacing));
 }
 
@@ -257,7 +258,9 @@ figure.theoremlike {
     order: -1;
     text-align: left;
     font-weight: bold;
-    transform: translate(-0.12em/*offset the highlighting margin for the title*/, 0);
+    transform: translate(-0.12em
+        /*offset the highlighting margin for the title*/
+        , 0);
   }
 
   >* {
@@ -312,6 +315,38 @@ figure.theoremlike {
   transition: color 0.5s ease-in-out;
 }
 
-li.tocVisible>a, .toc li>a:hover {
+li.tocVisible>a,
+.toc li>a:hover {
   color: var(--main-fg);
+}
+
+.csl-bib-body.hangingindent {
+  text-indent: 2em hanging;
+}
+
+.csl-bib-body {
+  margin: var(--default-spacing) 0;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+a.bib {
+  text-decoration: none;
+
+  .bibText {
+    text-decoration: underline solid;
+  }
+
+  .bibCitation {
+    color: var(--main-subtle);
+  }
+}
+
+.csl-bib-body:is(.flush, .margin) {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  justify-items: start;
+  column-gap: 0.5em;
 }

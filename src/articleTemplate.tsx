@@ -1,4 +1,12 @@
+import citationStyle from "../../macromania_temporary_monorepo/macromania_bib/styles/din-1505-2.csl.json" with { type: "json" };
+// import citationStyle from "../../macromania_temporary_monorepo/macromania_bib/styles/acm-sig-proceedings.csl.json" with { type: "json" };
+/*
+The macromania_bib package reexports the citations styles from https://github.com/citation-style-language/styles as jsons trings that can be directly imported into typescript. Very convenient. 
+*/
+
 import {
+  Bibliography,
+  BibScope,
   ConfigDefref,
   ConfigHsection,
   ConfigPreviews,
@@ -27,6 +35,7 @@ import {
   ServerRoot,
 } from "../deps.ts";
 import { LayoutStyles } from "./layoutStyles.tsx";
+import { bib } from "./bib.ts";
 
 export type ArticleTemplateProps = {
   title: Expression;
@@ -128,26 +137,39 @@ export function ArticleTemplate(
             }}
           >
             <File name="index.html">
-              <Html5
-                title="Macromania Demo"
-                headContents={`<meta name="viewport" content="width=device-width, initial-scale=1">`}
+              <BibScope
+                style={citationStyle} // The citationStyle variable is set in the first line of this file. Look there for more information.
+                lang="en-US" // Valid strings for specifying the locales are of the form `xx-YY` for which https://github.com/citation-style-language/locales contains a `locales-xx-YY.xml` file. 
+                forceLang // Ensure the locale you specified is used even if the citation style specifies a default locale.
+                items={bib}
               >
-                <CssDependency dep={["index.css"]} />
-                <JsDependency dep={["toc.js"]} scriptProps={{ defer: true }} />
+                <Html5
+                  title="Macromania Demo"
+                  headContents={`<meta name="viewport" content="width=device-width, initial-scale=1">`}
+                >
+                  <CssDependency dep={["index.css"]} />
+                  <JsDependency
+                    dep={["toc.js"]}
+                    scriptProps={{ defer: true }}
+                  />
 
-                <Div id="wrapContent">
-                  <Hsection title={title} n={titleId}>
-                    <TableOfContents stopLevel={99} />
-                    <Div>
-                      <RenderAuthors authors={authors ?? []} />
-                    </Div>
-                    <Div>
-                      <RenderAbstract children={abstract} />
-                    </Div>
-                    <exps x={children} />
-                  </Hsection>
-                </Div>
-              </Html5>
+                  <Div id="wrapContent">
+                    <Hsection title={title} n={titleId}>
+                      <TableOfContents stopLevel={99} />
+                      <Div>
+                        <RenderAuthors authors={authors ?? []} />
+                      </Div>
+                      <Div>
+                        <RenderAbstract children={abstract} />
+                      </Div>
+                      <exps x={children} />
+                      <Hsection title="References" n="bibliography" noNumbering>
+                        <Bibliography />
+                      </Hsection>
+                    </Hsection>
+                  </Div>
+                </Html5>
+              </BibScope>
             </File>
           </PreviewScopePushWrapper>
         </ServerRoot>

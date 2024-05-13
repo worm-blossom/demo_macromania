@@ -1,4 +1,15 @@
-import { BibScope, Else, Gt, If, Img, RefLoc, While } from "../deps.ts";
+import {
+  Bib,
+  Bibliography,
+  BibScope,
+  Cite,
+  Else,
+  Gt,
+  If,
+  Img,
+  RefLoc,
+  While,
+} from "../deps.ts";
 import { Assign } from "../deps.ts";
 import {
   A,
@@ -827,30 +838,6 @@ const exp = (
       </Hsection>
     </Hsection>
 
-    <Hsection n="cite" title="Citing">
-      <P>
-        Citations and references are quite an involved topic. We do not have a
-        good package yet, and might not get to it for a while, either. Any
-        serious attempt should probably build on the{" "}
-        <A href="https://citationstyles.org/">Citation Style Language</A>.
-      </P>
-
-      <BibScope
-        items={[{
-          item: `@inproceedings{meyer2023range,
-          title={Range-Based Set Reconciliation},
-          author={Meyer, Aljoscha},
-          booktitle={2023 42nd International Symposium on Reliable Distributed Systems (SRDS)},
-          pages={59--69},
-          year={2023},
-          organization={IEEE}
-        }
-        `,
-        }]}
-      >
-      </BibScope>
-    </Hsection>
-
     <Hsection n="assets" title="Assets">
       <P>
         Assets, such as stylesheets, javascript files, images, and so on, can be
@@ -935,6 +922,52 @@ const exp = (
         generated preview page. Hence, a preview that contains math rendering
         will work even when displayed on a page that does not load the math
         stylesheets itself.
+      </P>
+    </Hsection>
+
+    <Hsection n="cite" title="Citing">
+      <P>
+        Thanks to the{" "}
+        <A href="https://citationstyles.org/">Citation Style Language</A>{" "}
+        and its{" "}
+        <A href="https://citeproc-js.readthedocs.io/en/latest/index.html">
+          javascript implementation
+        </A>, Macromania has pretty good support for rendering citations.
+      </P>
+
+      <P>
+        The list of references you want to use can be edited in{" "}
+        <Code>./bib.ts</Code>. References can be given as{" "}
+        <A href="https://en.wikipedia.org/wiki/BibTeX">BibTex strings</A> or as
+        {" "}
+        <A href="https://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html#items">
+          CSL-JSON objects
+        </A>. The latter is technically the more sensible choice, since the
+        macros use CSL internally, but the former is more convenient. You can
+        optionally supply cited documents as an <R n="assets">asset</R>{" "}
+        or as a URL to automatically turn all references into hyperlinks.
+      </P>
+
+      <P>
+        You can cite individual references<Bib item="meyer2023range" />{" "}
+        or multiple references at once<Bib
+          item={["meyer2023range", "farmer2011network"]}
+        />. Citations can be{" "}
+        <Bib item="toomim2011utility">
+          tied to some text
+        </Bib>. In all cases, the package adds a nonbreaking space just before
+        the reference.
+      </P>
+
+      <P>
+        Search for the <Code>BibScope</Code> macro in{" "}
+        <Code>./articleTemplate.tsx</Code>{" "}
+        for documentation on changing the citation style and locale.
+      </P>
+
+      <P>
+        The <R n="bibliography">bibliography</R>{" "}
+        is rendered at the end of the document.
       </P>
     </Hsection>
 
