@@ -1,6 +1,6 @@
-# Demo Macromania Pseudocode
+# Demo Macromania Scientific Writing
 
-This repository gives a demo of writing pseudocode with Macromania.
+This repository gives a demo of writing papers with Macromania.
 
 ## Setup
 
