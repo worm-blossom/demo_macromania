@@ -1,6 +1,6 @@
 # Demo Macromania Scientific Writing
 
-This repository gives a demo of writing papers with Macromania.
+This repository gives a demo of writing papers with [Macromania](https://github.com/worm-blossom/macromania).
 
 ## Setup
 
